@@ -1,0 +1,10 @@
+.MuiFormControl-root {
+    width: 100% !important ;
+    margin: 0 !important;
+  }
+.MuiInputBase-formControl {
+    padding: 20px 0 !important;
+}
+.green-checkbox {
+    color: green; 
+}

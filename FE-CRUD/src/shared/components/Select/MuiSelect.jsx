@@ -1,9 +1,40 @@
-import React from 'react';
-import { Select } from '@mui/material';
-const MuiSelect = ({children , autoWidth , classes  , defaultOpen , defaultValue , input , onChange , ...props}) => {
-    return (
-        <Select autoWidth={autoWidth} classes={classes} defaultOpen = {defaultOpen} onChange={onChange} defaultValue={defaultValue} {...props}>{children}</Select>
-    );
-};
+import React, { forwardRef } from 'react';
+import {  Controller, useForm } from 'react-hook-form';
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
 
-export default MuiSelect;
+const CustomSelect = forwardRef(({ name, label, options }, ref) => {
+  const { control } = useForm();
+
+  return (
+    <FormControl variant="outlined" style={{ width: '100%' }}>
+      <InputLabel>{label}</InputLabel>
+      <Controller
+        name={name}
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <Select
+            {...field}
+            label={label}
+            style={{ width: '100%' }}
+            autoWidth
+            ref={ref} // Đặt ref vào Select
+          >
+            {options.map((item, index) => (
+              <MenuItem key={index} value={item.value}>
+                {item.label}
+              </MenuItem>
+            ))}
+          </Select>
+        )}
+      />
+    </FormControl>
+  );
+});
+
+export default CustomSelect;

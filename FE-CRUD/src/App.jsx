@@ -4,12 +4,17 @@ import Users from './features/Users/Users';
 import UserForm from './features/Users/UserForm';
 
 import './App.css'
+import Post from './features/Posts/Post';
+import PostForm from './features/Posts/PostForm';
 
 function App() {
   const navItems  = [
     { path: '/users', label: 'List User', component: <Users/> },
     {path : '/users/add' , label : 'Add User' , component : <UserForm/>},
-    {path : '/users/edit/:id' , label : 'Edit User' , component : <UserForm/>}
+    {path : '/users/edit/:id' , label : 'Edit User' , component : <UserForm/>},
+    {path: '/posts', label: 'List Post', component: <Post/>},
+    {path: '/posts/add', label: 'Add Post', component: <PostForm/>},
+    {path: '/posts/edit/:id', label: 'Edit Post', component: <PostForm/>}
   ];
 
   return (

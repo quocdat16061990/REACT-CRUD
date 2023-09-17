@@ -50,3 +50,14 @@
   text-decoration: none;
  }
  p {margin: 0;}
+
+ .user{
+  display: flex ;
+  gap: 10px;
+  justify-content: center;
+ }
+
+ .custom {
+  color: black;
+  font-size: 17px;
+ }

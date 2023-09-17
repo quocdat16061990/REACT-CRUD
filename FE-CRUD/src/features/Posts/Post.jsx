@@ -2,24 +2,43 @@ import React from 'react';
 import MuiButton from '../../shared/components/Button';
 import MuiTable from '../../shared/components/Table';
 import { useDispatch, useSelector } from "react-redux";
+import { deletePost , startEditingPost } from './postSlice';
+import { getPostList } from './postSlice';
 import { useEffect } from "react";
-import { deleteUser, getUserList , startEditingUser } from './usersSlice';
 import {  toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-const Users = () => {
-
+const Post = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const promise = dispatch(getUserList());
+        const promise = dispatch(getPostList());
         return () => {
           promise.abort();
         };
       }, [dispatch]);
-    const columns = [
+    
+     const initialRows = useSelector((state) => state?.post?.postList);
+     const handleStartDelete = (id)=> {
+      try {
+          dispatch(deletePost(id))
+          toast.error("Xóa thành công");
+      } catch (error) {
+          console.log(error)
+      }
+  }
+
+  const handleStartEditing = (id) => {
+    try {
+      dispatch(startEditingPost(id))
+    } catch (error) {
+      console.log(error)
+    }
+  
+ };
+     const columns = [
         { field: 'id', headerName: 'ID', width: 200 },
-        { field: 'name', headerName: ' Name', width: 200, editable: true },
-        { field: 'email', headerName: ' Email', width: 200, editable: true },
+        { field: 'author', headerName: ' Author', width: 200, editable: true },
+        { field: 'users', headerName: ' Users', width: 200, editable: true },
         {
             field: 'edit', 
             headerName: 'Edit', 
@@ -32,7 +51,7 @@ const Users = () => {
                 width: '50%',
                }}
               >
-                <Link className="update" to ={`/users/edit/:${params.id}`} onClick={() => handleStartEditing(params.id)}>Edit</Link>
+                <Link className="update" to ={`/posts/edit/:${params.row.id}`} onClick={() => handleStartEditing(params.id)}>Edit</Link>
               </MuiButton>
             ),
           },
@@ -54,25 +73,11 @@ const Users = () => {
               </MuiButton>
             ),
           },
-    ]
-
-    const handleStartDelete = (id)=> {
-        try {
-            dispatch(deleteUser(id))
-            toast.error("Xóa thành công");
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const handleStartEditing = (id) => {
-        dispatch(startEditingUser(id))
-   };
-    
-    const initialRows = useSelector((state) => state.user.userList);
+    ] 
+   
     return (
-       <MuiTable rows={initialRows} columns={columns}/>
+        <MuiTable rows={initialRows} columns={columns} />
     );
 };
 
-export default Users;
+export default Post;

@@ -1,37 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MuiInput from "../../shared/components/Input";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createUser , updateUser } from "./usersSlice";
-import { useEffect } from "react";
+import { createUser, updateUser } from "./usersSlice";
 import MuiButton from "../../shared/components/Button";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import {  toast } from 'react-toastify';
 const UserForm = () => {
-  const { handleSubmit, control, formState: { errors } , reset } = useForm();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const editingUser = useSelector((state) => state?.user?.editingUser.id);
-  console.log('editingUser', editingUser)
+  const editingUser = useSelector((state) => state?.user?.editingUser);
+
   
-  useEffect(()=>{
-    if(editingUser) {
-      reset({
-        name: editingUser.name,
-        email: editingUser.email
-      })
+  const isEditMode = Boolean(editingUser);
+
+  const { handleSubmit, control, formState: { errors }, reset } = useForm({
+    defaultValues: isEditMode ? editingUser : {}, 
+  });
+
+  useEffect(() => {
+    if (isEditMode) {
+      
+      reset(editingUser);
     }
-  },[editingUser,reset])
+  }, [isEditMode, editingUser, reset]);
+
   const onSubmit = (data) => {
-    if(editingUser) {
-      dispatch(updateUser({id : editingUser.id ,body : data}))
-      alert("update thanh cong")
+    if (isEditMode) {
+      dispatch(updateUser({ userId: editingUser.id, body: data }));
+      toast.warn("Cập nhật thành công");
+    } else {
+     
+      dispatch(createUser(data));
+      toast.success("Thêm thành công");
     }
-    else {
-      dispatch(createUser(data))
-      alert("them thanh con")
-    }
-  
     navigate("/users");
   };
 
@@ -96,7 +100,7 @@ const UserForm = () => {
               {...field}
             />
             {errors.email && (
-              <p style={{ color: 'red' , margin: 0 }}>
+              <p style={{ color: 'red', margin: 0 }}>
                 {errors.email.message}
               </p>
             )}
@@ -108,7 +112,9 @@ const UserForm = () => {
         width: '100%',
         paddingTop: '20px',
         paddingBottom: '20px',
-      }}>Add User</MuiButton>
+      }}>
+        {isEditMode ? "Update User" : "Add User"}
+      </MuiButton>
     </form>
   );
 };
