@@ -23,7 +23,7 @@ const CustomSelect = forwardRef(({ name, label, options }, ref) => {
             label={label}
             style={{ width: '100%' }}
             autoWidth
-            ref={ref} // Đặt ref vào Select
+            ref={ref} 
           >
             {options.map((item, index) => (
               <MenuItem key={index} value={item.value}>

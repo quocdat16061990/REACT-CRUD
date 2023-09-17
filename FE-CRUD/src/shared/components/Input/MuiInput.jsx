@@ -25,7 +25,7 @@ const MuiInput = React.forwardRef(({ name, label, ...rest }, ref) => {
           {...field}
           {...rest}
           style={customStyle}
-          inputRef={ref} // Forward the ref to the Input component
+          inputRef={ref} 
         />
       )}
     />
