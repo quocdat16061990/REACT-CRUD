@@ -66,7 +66,7 @@ const PostForm = () => {
       dispatch(updatePost({ postId: editingPost.id, body: data, users: selectedNames }));
       toast.warn("Cập nhật thành công");
     } else {
-      dispatch(createPost({ ...data, users: selectedNames }));
+      dispatch(createPost(data));
       toast.success("Thêm thành công");
     }
     navigate("/posts");
@@ -137,7 +137,7 @@ const PostForm = () => {
               }}
             >
               {userList.map((user) => (
-                <MenuItem key={user.name} value={user.name}>
+                <MenuItem key={user.id} value={user.name}>
                   <Checkbox className="green-checkbox" checked={selectedNames.indexOf(user.name) > -1} />
                   <ListItemText primary={user.name} />
                 </MenuItem>

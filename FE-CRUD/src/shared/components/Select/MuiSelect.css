@@ -1,18 +1,10 @@
-
-/* Màu sắc border mặc định */
-.MuiInput-root.MuiInput-underline:before {
-    border-bottom: none; /* Màu đen khi hover */
-  }
-  
-  /* Màu sắc border khi hover */
-  .MuiInput-root.MuiInput-underline:hover:not(.Mui-disabled):before {
-    border-bottom: none; /* Màu xanh khi click */
-  }
-  
-  /* Màu sắc border khi focus (click) */
-  .MuiInput-root.MuiInput-underline:focus:not(.Mui-disabled):before {
-    border-bottom: none; /* Màu xanh khi click */
-  }  
-  .MuiInput-root.MuiInput-underline:after {
-    border-bottom: none; 
-  }
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  all: initial !important;
+}
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  color: #00B4AA !important;
+}
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input
+{
+  padding: 4px;
+}

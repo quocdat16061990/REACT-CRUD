@@ -44,15 +44,19 @@ const Post = () => {
             headerName: 'Edit', 
             width: 300,
             renderCell: (params) => ( 
-              <MuiButton
+              <Link className="update" to ={`/posts/edit/:${params.id}`} >
+                      <MuiButton
                 color="warning"
                 variant="contained"
                 sx={{
-                width: '50%',
+                width: '100%',
                }}
+               onClick={() => handleStartEditing(params.id)}
               >
-                <Link className="update" to ={`/posts/edit/:${params.row.id}`} onClick={() => handleStartEditing(params.id)}>Edit</Link>
+               Edit
               </MuiButton>
+              </Link>
+        
             ),
           },
           {

@@ -1,17 +1,17 @@
 
-/* Màu sắc border mặc định */
+
 .MuiInput-root.MuiInput-underline:before {
-    border-bottom: none; /* Màu đen khi hover */
+    border-bottom: none; 
   }
   
-  /* Màu sắc border khi hover */
+  
   .MuiInput-root.MuiInput-underline:hover:not(.Mui-disabled):before {
-    border-bottom: none; /* Màu xanh khi click */
+    border-bottom: none; 
   }
   
-  /* Màu sắc border khi focus (click) */
+
   .MuiInput-root.MuiInput-underline:focus:not(.Mui-disabled):before {
-    border-bottom: none; /* Màu xanh khi click */
+    border-bottom: none; 
   }  
   .MuiInput-root.MuiInput-underline:after {
     border-bottom: none; 
